@@ -33,5 +33,7 @@ Route::put('/tickets/{id}', [TicketController::class, 'update'])->name('tickets.
 Route::delete('/tickets/{id}', [TicketController::class, 'destroy'])->name('tickets.destroy');
 Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets.store');
+route::get('/produk/edit{id}', [TicketController::class, 'edit'])->name('tickets.edit');
+route::put('/produk/update{id}', [TicketController::class, 'update'])->name('tickets.update');
 
 require __DIR__ . '/auth.php';
