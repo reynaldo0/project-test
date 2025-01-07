@@ -35,7 +35,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $ticket->title }}</td>
-                                <td>{{ $ticket->user->name ?? 'Tidak Diketahui' }}</td>
+                                <td>{{ $ticket->user->email ?? 'Tidak Diketahui' }}</td>
                                 <td>{{ $ticket->created_at->format('d M Y H:i') }}</td>
                                 <td>{{ $ticket->status }}</td> <!-- Tampilkan status -->
                                 <td>
