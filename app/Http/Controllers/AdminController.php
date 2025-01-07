@@ -27,7 +27,15 @@ class AdminController extends Controller
         return view('admin.index', compact('tickets', 'ticketCount'));
     }
 
-    public function update(Request $request, $id)
+    public function edit(Ticket $id)
+    {
+        return view('admin.edit', compact('id'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -54,6 +62,6 @@ class AdminController extends Controller
 
         $ticket->save();
 
-        return redirect()->route('admin.index')->with('success', 'Ticket updated successfully!');
+        return redirect()->route('admin.dashboard')->with('success', 'Ticket updated successfully!');
     }
 }
