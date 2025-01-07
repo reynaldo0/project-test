@@ -36,4 +36,11 @@ Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets
 route::get('/produk/edit{id}', [TicketController::class, 'edit'])->name('tickets.edit');
 route::put('/produk/update{id}', [TicketController::class, 'update'])->name('tickets.update');
 
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/tickets/create', [AdminController::class, 'createTicket'])->name('admin.tickets.create');
+    Route::post('/tickets', [AdminController::class, 'storeTicket'])->name('admin.tickets.store');
+    Route::get('/tickets/{id}/edit', [AdminController::class, 'editTicket'])->name('admin.tickets.edit');
+});
+
 require __DIR__ . '/auth.php';
