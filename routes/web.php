@@ -21,26 +21,21 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/tickets/{id}/edit', [TicketController::class, 'edit'])->name('admin.edit');
+    Route::put('/admin/{id}', [TicketController::class, 'update'])->name('admin.update');
 });
 
 Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'dashboard'])->name('agent.dashboard');
 });
 
-Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
 Route::get('/tickets/{id}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
 Route::put('/tickets/{id}', [TicketController::class, 'update'])->name('tickets.update');
 Route::delete('/tickets/{id}', [TicketController::class, 'destroy'])->name('tickets.destroy');
 Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets.store');
-route::get('/produk/edit{id}', [TicketController::class, 'edit'])->name('tickets.edit');
-route::put('/produk/update{id}', [TicketController::class, 'update'])->name('tickets.update');
-
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/tickets/create', [AdminController::class, 'createTicket'])->name('admin.tickets.create');
-    Route::post('/tickets', [AdminController::class, 'storeTicket'])->name('admin.tickets.store');
-    Route::get('/tickets/{id}/edit', [AdminController::class, 'editTicket'])->name('admin.tickets.edit');
-});
+Route::get('/ticket/{id}/edit', [TicketController::class, 'edit'])->name('ticket.edit');
+Route::put('/ticket/{id}', [TicketController::class, 'update'])->name('ticket.update');
 
 require __DIR__ . '/auth.php';

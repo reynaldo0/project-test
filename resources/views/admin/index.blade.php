@@ -54,7 +54,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ticket as $ticket)
+                                    @foreach ($tickets as $ticket)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $ticket->title }}</td>
@@ -91,7 +91,7 @@
                                             @if (auth()->user()->role === 'admin' || auth()->user()->role === 'agent')
                                                 <td>
                                                     <!-- Tombol Edit -->
-                                                    <a href="{{ route('tickets.edit', $ticket->id) }}"
+                                                    <a href="{{ route('admin.edit', $ticket->id) }}"
                                                         class="btn btn-warning btn-sm" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>

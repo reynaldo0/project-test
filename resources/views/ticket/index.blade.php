@@ -48,13 +48,11 @@
                                         <th>Kategori</th>
                                         <th>Prioritas</th>
                                         <th>Lampiran</th>
-                                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'agent')
-                                            <th>Aksi</th>
-                                        @endif
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ticket as $ticket)
+                                    @foreach ($tickets as $ticket)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $ticket->title }}</td>
@@ -88,29 +86,10 @@
                                                     Tidak Ada
                                                 @endif
                                             </td>
-                                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'agent')
-                                                <td>
-                                                    <!-- Tombol Edit -->
-                                                    <a href="{{ route('tickets.edit', $ticket->id) }}"
-                                                        class="btn btn-warning btn-sm" title="Edit">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-
-                                                    <!-- Tombol Hapus -->
-                                                    <form action="{{ route('tickets.destroy', $ticket->id) }}"
-                                                        method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus"
-                                                            onclick="return confirm('Yakin ingin menghapus tiket ini?')">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>
