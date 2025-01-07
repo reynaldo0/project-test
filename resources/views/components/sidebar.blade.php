@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -12,8 +12,9 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
+    <!-- Dashboard - Visible to all roles -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -21,7 +22,7 @@
 
     <!-- Ticket - Visible to all roles -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('ticket.index') }}">
             <i class="fas fa-ticket-alt"></i>
             <span>Ticket</span>
         </a>
@@ -30,25 +31,25 @@
     <!-- Additional Items - Only for Admin -->
     @if(Auth::user()->role === 'admin')
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('ticket.logs') }}">
                 <i class="fas fa-history"></i>
                 <span>Ticket Logs</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('users.index') }}">
                 <i class="fas fa-users"></i>
                 <span>Users</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('categories.index') }}">
                 <i class="fas fa-folder"></i>
                 <span>Categories</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('labels.index') }}">
                 <i class="fas fa-tags"></i>
                 <span>Labels</span>
             </a>

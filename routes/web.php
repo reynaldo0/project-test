@@ -5,13 +5,18 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LabelController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketLogController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [TicketController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,6 +31,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/tickets/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
     Route::put('/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
     Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+    Route::get('/ticket-logs', [TicketLogController::class, 'index'])->name('ticket.logs');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/labels', [LabelController::class, 'index'])->name('labels.index');
 });
 
 Route::middleware(['auth', 'role:agent'])->group(function () {
