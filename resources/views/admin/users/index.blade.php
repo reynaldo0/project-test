@@ -1,4 +1,4 @@
-@extends('ticket.layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <div id="content-wrapper" class="d-flex flex-column">

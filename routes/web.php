@@ -34,12 +34,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
     Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
-    Route::get('/ticket-logs', [TicketLogController::class, 'index'])->name('ticket.logs');
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/labels', [LabelController::class, 'index'])->name('labels.index');
+    Route::get('/admin/ticket-logs', [TicketLogController::class, 'index'])->name('ticket.logs');
+    Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/admin/labels', [LabelController::class, 'index'])->name('labels.index');
 
-    Route::put('/users/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
+    Route::put('/admin/users/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
+    Route::get('/admin/tickets/{id}/details', [TicketLogController::class, 'details']);
+    Route::post('/admin/tickets/{ticketId}/assign', [TicketLogController::class, 'assignTicket'])->name('tickets.assign');
 });
 
 Route::middleware(['auth', 'role:agent'])->group(function () {
