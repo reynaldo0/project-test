@@ -11,6 +11,7 @@ class AddAgentIdToTicketsTable extends Migration
         Schema::table('tickets', function (Blueprint $table) {
             $table->unsignedBigInteger('agent_id')->nullable()->after('user_id');
             $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('status')->default('Pending')->after('agent_id');
         });
     }
 
@@ -19,6 +20,7 @@ class AddAgentIdToTicketsTable extends Migration
         Schema::table('tickets', function (Blueprint $table) {
             $table->dropForeign(['agent_id']);
             $table->dropColumn('agent_id');
+            $table->dropColumn('status');
         });
     }
 }

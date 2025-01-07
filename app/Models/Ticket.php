@@ -14,14 +14,15 @@ class Ticket extends Model
         'labels',
         'categories',
         'priority',
-        'attachment'
+        'attachment',
+        'status',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id'); // Pastikan relasi ini menggunakan 'user_id'
     }
-    
+
     public function assignedTo()
     {
         return $this->belongsTo(User::class, 'assigned_to'); // Relasi dengan agen yang ditugaskan

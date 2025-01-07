@@ -42,19 +42,20 @@ class TicketLogController extends Controller
         return view('admin.ticket.show', compact('ticket', 'agents'));
     }
 
-    public function assignTicket(Request $request, $ticketId)
+    public function assignTicket(Request $request)
     {
-        $ticket = Ticket::findOrFail($ticketId);
-
-        // Validasi agen yang dipilih
         $request->validate([
+            'ticket_id' => 'required|exists:tickets,id',
             'agent_id' => 'required|exists:users,id',
         ]);
 
-        // Assign agen ke tiket
+        $ticket = Ticket::findOrFail($request->ticket_id);
         $ticket->agent_id = $request->agent_id;
+
+        // Ubah status menjadi "Assigned" jika agen dipilih
+        $ticket->status = 'Assigned';
         $ticket->save();
 
-        return redirect()->back()->with('success', 'Agen berhasil ditugaskan.');
+        return redirect()->back()->with('success', 'Ticket berhasil di-assign ke agen.');
     }
 }
