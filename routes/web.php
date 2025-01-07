@@ -38,6 +38,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/labels', [LabelController::class, 'index'])->name('labels.index');
+
+    Route::put('/users/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
 });
 
 Route::middleware(['auth', 'role:agent'])->group(function () {
