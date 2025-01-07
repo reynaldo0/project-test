@@ -19,7 +19,7 @@
                                 </div>
                                 <!-- Tombol Buat Tiket di bagian bawah kanan -->
                                 <div class="card-footer text-end">
-                                    <a href="{{ route('tickets.create') }}" class="btn btn-primary">
+                                    <a href="{{ route('admin.create') }}" class="btn btn-primary">
                                         <i class="fas fa-plus"></i> Buat Tiket
                                     </a>
                                 </div>
