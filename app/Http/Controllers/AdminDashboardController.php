@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class AdminDashboardController extends Controller
 {
     protected $ticketService;
 
@@ -21,12 +21,12 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $ticketCount = $this->ticketService->getTicketCount();
-        return view('ticket.dashboard', compact('ticketCount'));
+        return view('admin.dashboard', compact('ticketCount'));
     }
 
     public function index()
     {
         $ticketCount = $this->ticketService->getTicketCount();
-        return view('ticket.dashboard');
+        return view('admin.dashboard');
     }
 }

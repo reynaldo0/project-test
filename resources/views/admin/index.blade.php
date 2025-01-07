@@ -8,25 +8,6 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Ticket List</h1>
-
-                    <!-- Row untuk Box Jumlah Tiket dan Tombol Buat Tiket -->
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <div class="card d-flex flex-column justify-content-between" style="height: 150px;">
-                                <div class="card-body">
-                                    <h5 class="card-title">Jumlah Tiket</h5>
-                                    <h2>{{ $ticketCount }}</h2>
-                                </div>
-                                <!-- Tombol Buat Tiket di bagian bawah kanan -->
-                                <div class="card-footer text-end">
-                                    <a href="{{ route('admin.create') }}" class="btn btn-primary">
-                                        <i class="fas fa-plus"></i> Buat Tiket
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Tombol Create yang sudah dipindahkan dalam box -->
                     <div class="mb-3">
                         <!-- Tombol Create -->

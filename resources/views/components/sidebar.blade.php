@@ -34,11 +34,23 @@
 
     <!-- Ticket - Visible to all roles -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('ticket.index') }}">
-            <i class="fas fa-ticket-alt"></i>
-            <span>Ticket</span>
-        </a>
-    </li>
+        @if (Auth::user()->role === 'admin')
+            <a class="nav-link" href="{{ route('admin.index') }}">
+                <i class="fas fa-ticket-alt"></i>
+                <span>Admin Ticket</span>
+            </a>
+        @elseif (Auth::user()->role === 'agent')
+            <a class="nav-link" href="{{ route('agent.index') }}">
+                <i class="fas fa-ticket-alt"></i>
+                <span>Agent Ticket</span>
+            </a>
+        @else
+            <a class="nav-link" href="{{ route('ticket.index') }}">
+                <i class="fas fa-ticket-alt"></i>
+                <span>Ticket</span>
+            </a>
+        @endif
+    </li>    
 
     <!-- Additional Items - Only for Admin -->
     @if (Auth::user()->role === 'admin')

@@ -96,7 +96,7 @@ class AdminController extends Controller
 
         $ticket->save();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Ticket updated successfully!');
+        return redirect()->route('admin.index')->with('success', 'Ticket updated successfully!');
     }
 
     public function destroy($id)
@@ -108,6 +108,6 @@ class AdminController extends Controller
         $ticket->delete();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('admin.dashboard')->with('success', 'Tiket berhasil dihapus.');
+        return redirect()->route('admin.index')->with('success', 'Tiket berhasil dihapus.');
     }
 }
