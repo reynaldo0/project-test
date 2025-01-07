@@ -97,7 +97,7 @@
                                                     </a>
 
                                                     <!-- Tombol Hapus -->
-                                                    <form action="{{ route('tickets.destroy', $ticket->id) }}"
+                                                    <form action="{{ route('admin.destroy', $ticket->id) }}"
                                                         method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')

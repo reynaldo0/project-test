@@ -64,4 +64,16 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Ticket updated successfully!');
     }
+
+    public function destroy($id)
+    {
+        // Cari tiket berdasarkan ID
+        $ticket = Ticket::findOrFail($id);
+
+        // Hapus tiket
+        $ticket->delete();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin.dashboard')->with('success', 'Tiket berhasil dihapus.');
+    }
 }
