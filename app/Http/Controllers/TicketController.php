@@ -11,18 +11,26 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    private function getTicketData()
     {
         $ticket = Ticket::all();
         $ticketCount = $ticket->count();
 
-        // Kembalikan data sebagai array
         return [
             'ticket' => $ticket,
             'ticketCount' => $ticketCount,
         ];
     }
 
+    /**
+     * Tampilkan halaman tiket untuk user.
+     */
+    public function index()
+    {
+        // Ambil data dan kirim ke view user
+        $data = $this->getTicketData();
+        return view('ticket.index', $data);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +48,7 @@ class TicketController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'message' => 'required|string',
-            'labels' => 'required|array',
+            'labels' => 'required|array', 
             'labels.*' => 'string|max:50',
             'categories' => 'required|array',
             'categories.*' => 'string|max:50',

@@ -2,54 +2,108 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\TicketController; // Import TicketController
+use App\Http\Controllers\Controller;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    protected $ticketController;
-
-    public function __construct(TicketController $ticketController)
+    /**
+     * Display a listing of the resource.
+     */
+    private function getAdminData()
     {
-        $this->ticketController = $ticketController;
+        $ticket = Ticket::all();
+        $ticketCount = $ticket->count();
+
+        return [
+            'ticket' => $ticket,
+            'ticketCount' => $ticketCount,
+        ];
     }
 
     /**
-     * Dashboard admin dengan data dari TicketController
+     * Tampilkan halaman tiket untuk user.
      */
+    public function index()
+    {
+        // Ambil data dan kirim ke view user
+        $data = $this->getAdminData();
+        return view('Admin.index', $data);
+    }
+
     public function dashboard()
-    {
-        // Panggil metode index dari TicketController
-        $data = $this->ticketController->index();
+{
+    $data = $this->getAdminData(); // Menggunakan fungsi getAdminData() untuk mendapatkan data
+    return view('admin.index', $data); // Mengarahkan ke view dashboard
+}
 
-        // Tampilkan view admin dashboard dengan data tiket
-        return view('admin.index', $data);
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('Admin.create');
     }
 
     /**
-     * Form pembuatan tiket admin
+     * Store a newly created resource in storage.
      */
-    public function createTicket()
+    public function store(Request $request)
     {
-        // Panggil metode create dari TicketController
-        return $this->ticketController->create();
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'message' => 'required|string',
+            'labels' => 'required|array', 
+            'labels.*' => 'string|max:50',
+            'categories' => 'required|array',
+            'categories.*' => 'string|max:50',
+            'priority' => 'required|in:low,medium,high',
+            'attachment' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
+        ]);
+
+        // Simpan data ke database
+        \App\Models\Ticket::create([
+            'title' => $validatedData['title'],
+            'message' => $validatedData['message'],
+            'labels' => json_encode($validatedData['labels']),
+            'categories' => json_encode($validatedData['categories']),
+            'priority' => $validatedData['priority'],
+            'attachment' => $request->file('attachment') ? $request->file('attachment')->store('uploads/files') : null,
+        ]);
+
+        return redirect()->route('Admins.index')->with('success', 'Admin berhasil dibuat!');
     }
 
     /**
-     * Simpan tiket baru
+     * Display the specified resource.
      */
-    public function storeTicket(Request $request)
+    public function show(string $id)
     {
-        // Panggil metode store dari TicketController
-        return $this->ticketController->store($request);
+        //
     }
 
     /**
-     * Edit tiket
+     * Show the form for editing the specified resource.
      */
-    public function editTicket($id)
+    public function edit(Ticket $id)
     {
-        // Panggil metode edit dari TicketController
-        return $this->ticketController->edit($id);
+        return view('Admin.edit', compact('id'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
