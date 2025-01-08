@@ -1,4 +1,4 @@
-@extends('ticket.layouts.app')
+@extends('agent.layouts.app')
 
 @section('content')
     <div id="content-wrapper" class="d-flex flex-column">
@@ -8,6 +8,11 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Ticket List</h1>
+                    <!-- Tombol Create yang sudah dipindahkan dalam box -->
+                    <div class="mb-3">
+                        <!-- Tombol Create -->
+                        <!-- Tombol Create sudah ada di card-footer di atas, jadi ini bisa dihapus -->
+                    </div>
 
                     <div class="card mb-4">
                         <div class="card-header">
@@ -24,7 +29,9 @@
                                         <th>Kategori</th>
                                         <th>Prioritas</th>
                                         <th>Lampiran</th>
-                                        
+                                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'agent')
+                                            <th>Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,10 +69,29 @@
                                                     Tidak Ada
                                                 @endif
                                             </td>
+                                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'agent')
+                                                <td>
+                                                    <!-- Tombol Edit -->
+                                                    <a href="{{ route('agent.edit', $ticket->id) }}"
+                                                        class="btn btn-warning btn-sm" title="Edit">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+
+                                                    <!-- Tombol Hapus -->
+                                                    <form action="{{ route('agent.destroy', $ticket->id) }}"
+                                                        method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus"
+                                                            onclick="return confirm('Yakin ingin menghapus tiket ini?')">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                
                             </table>
                         </div>
                     </div>

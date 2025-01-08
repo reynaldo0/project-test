@@ -15,7 +15,7 @@ class TicketController extends Controller
     {
         $this->ticketService = $ticketService;
     }
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +23,7 @@ class TicketController extends Controller
     {
         $tickets = Ticket::all();
         $ticketCount = $tickets->count();
-        return view('ticket.index', compact('tickets','ticketCount'));
+        return view('ticket.index', compact('tickets', 'ticketCount'));
     }
 
     /**
@@ -42,7 +42,7 @@ class TicketController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'message' => 'required|string',
-            'labels' => 'required|array', 
+            'labels' => 'required|array',
             'labels.*' => 'string|max:50',
             'categories' => 'required|array',
             'categories.*' => 'string|max:50',
@@ -74,10 +74,7 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ticket $id)
-    {
-       
-    }
+    public function edit(Ticket $id) {}
 
     /**
      * Update the specified resource in storage.

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\AssignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LabelController;
@@ -46,7 +47,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'dashboard'])->name('agent.dashboard');
-    Route::get('/agent/tickets', [AgentController::class, 'dashboard'])->name('agent.index');
+    Route::get('/agent/tickets', [AgentController::class, 'tickets'])->name('agent.index');
+    Route::get('/agent/assign', [AssignController::class, 'index'])->name('assign.index');
+
+    Route::get('/agent/create', [AgentController::class, 'create'])->name('agent.create');
+    Route::post('/agent/store', [AgentController::class, 'store'])->name('agent.store');
+    Route::get('/agent/tickets/{id}/edit', [AgentController::class, 'edit'])->name('agent.edit');
+    Route::put('/agent/{id}', [AgentController::class, 'update'])->name('agent.update');
+    Route::delete('/agent/{id}', [AgentController::class, 'destroy'])->name('agent.destroy');
 });
 
 Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
