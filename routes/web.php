@@ -38,7 +38,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/admin/labels', [LabelController::class, 'index'])->name('labels.index');
-
+    
     Route::put('/admin/users/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
     Route::get('/admin/tickets/{id}/details', [TicketLogController::class, 'details']);
     Route::post('/admin/tickets/{ticketId}/assign', [TicketLogController::class, 'assignTicket'])->name('tickets.assign');
@@ -46,6 +46,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'dashboard'])->name('agent.dashboard');
+    Route::get('/agent/tickets', [AgentController::class, 'dashboard'])->name('agent.index');
 });
 
 Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
